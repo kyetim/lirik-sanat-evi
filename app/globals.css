@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+
+/* ── Theme variables ── */
+:root,
+[data-theme="dark"] {
+  --tw-bg:      #0a0a0a;
+  --tw-navy:    #0d1b2e;
+  --tw-cream:   #f0ead8;
+  --tw-surface: #111111;
+
+  --input-bg:          rgba(255, 255, 255, 0.05);
+  --input-bg-hover:    rgba(255, 255, 255, 0.08);
+  --input-border:      rgba(201, 168, 76, 0.2);
+  --input-text:        #f0ead8;
+  --input-placeholder: rgba(240, 234, 216, 0.35);
+  --input-option-bg:   #0a0a0a;
+}
+
+[data-theme="light"] {
+  --tw-bg:      #faf9f6;
+  --tw-navy:    #e8e2d5;
+  --tw-cream:   #1a1208;
+  --tw-surface: #f0ead8;
+
+  --input-bg:          rgba(0, 0, 0, 0.04);
+  --input-bg-hover:    rgba(0, 0, 0, 0.07);
+  --input-border:      rgba(201, 168, 76, 0.35);
+  --input-text:        #1a1208;
+  --input-placeholder: rgba(26, 18, 8, 0.4);
+  --input-option-bg:   #faf9f6;
+}
+
+* { cursor: none; }
+
+body {
+  background-color: var(--tw-bg);
+  color: var(--tw-cream);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-block px-8 py-3.5 bg-gold text-[#0a0a0a] text-[12px] font-medium tracking-[2px] uppercase
+           hover:bg-gold-light transition-all duration-300 hover:-translate-y-0.5;
+  }
+  .btn-secondary {
+    @apply inline-block px-8 py-3.5 border border-gold/50 text-[12px] font-light tracking-[2px] uppercase
+           hover:border-gold hover:text-gold transition-all duration-300 hover:-translate-y-0.5;
+    color: var(--tw-cream);
+  }
+  /* ── Form elements ── */
+  .form-input {
+    background-color: var(--input-bg);
+    color:            var(--input-text);
+    border-color:     var(--input-border);
+    @apply border px-5 py-4 text-sm font-light outline-none transition-colors duration-200 w-full;
+  }
+  .form-input::placeholder {
+    color: var(--input-placeholder);
+  }
+  .form-input:hover {
+    background-color: var(--input-bg-hover);
+  }
+  .form-input:focus {
+    border-color: #C9A84C;
+    background-color: var(--input-bg-hover);
+  }
+  .form-input option {
+    background-color: var(--input-option-bg);
+    color:            var(--input-text);
+  }
+  /* Tarayıcı autofill override */
+  .form-input:-webkit-autofill,
+  .form-input:-webkit-autofill:hover,
+  .form-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--input-text);
+    -webkit-box-shadow: 0 0 0px 1000px var(--tw-bg) inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  .section-label {
+    @apply flex items-center gap-3 text-[10px] tracking-[4px] uppercase text-gold mb-4;
+  }
+  .section-label::before {
+    content: '';
+    @apply block w-8 h-px bg-gold;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .bg-theme      { background-color: var(--tw-bg); }
+  .bg-theme-navy { background-color: var(--tw-navy); }
+  .text-theme    { color: var(--tw-cream); }
+}
