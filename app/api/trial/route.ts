@@ -17,5 +17,24 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
 
+  // n8n webhook - email bildirimi gönder
+  try {
+    await fetch('https://kyetim.app.n8n.cloud/webhook/deneme-dersi', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: `${first_name} ${last_name}`,
+        email,
+        phone,
+        instrument,
+        student_age_range,
+        note: note || '',
+      }),
+    })
+  } catch (webhookError) {
+    // Webhook hatası kullanıcıyı etkilemesin, sadece logla
+    console.error('n8n webhook hatası:', webhookError)
+  }
+
   return NextResponse.json({ success: true })
 }
