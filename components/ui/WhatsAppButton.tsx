@@ -15,7 +15,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={tr.whatsapp.ariaLabel}
-      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14
+      className="fixed bottom-6 right-6 z-[200] flex items-center justify-center w-14 h-14
         bg-[#25D366] hover:bg-[#1ebe5d] shadow-[0_4px_24px_rgba(37,211,102,0.4)]
         hover:shadow-[0_6px_32px_rgba(37,211,102,0.55)]
         transition-all duration-300 hover:-translate-y-1"
