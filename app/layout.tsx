@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Providers from '@/components/Providers'
-import N8nChat from '@/components/ui/N8nChat'
+import ChatWidget from '@/components/ui/ChatWidget'
 
 export const metadata: Metadata = {
   title: 'Lirik Sanat Evi — Mersin Müzik Akademisi',
@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           {children}
         </Providers>
-        <N8nChat />
+        <ChatWidget />
       </body>
     </html>
   )

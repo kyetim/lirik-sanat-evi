@@ -99,3 +99,7 @@ body {
   .bg-theme-navy { background-color: var(--tw-navy); }
   .text-theme    { color: var(--tw-cream); }
 }
+
+.chat-textarea::placeholder {
+  color: var(--input-placeholder);
+}
