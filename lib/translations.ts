@@ -200,6 +200,17 @@ export const t = {
       copy: '© 2025 Lirik Sanat Evi. Tüm hakları saklıdır. · Mersin, Türkiye',
       dev: 'Tasarım & Geliştirme',
     },
+    chat: {
+      subtitle: 'Size nasıl yardımcı olabiliriz?',
+      placeholder: 'Mesajınızı yazın...',
+      newChat: 'Yeni konuşma başlat',
+      sendHint: 'Enter ile gönderin · Shift+Enter yeni satır',
+      closeLabel: 'Sohbeti kapat',
+      openLabel: 'Asistanla sohbet et',
+      greeting1: 'Merhaba! 🎵',
+      greeting2: 'Ben Lirik Sanat Evi asistanıyım. Dersler, fiyatlar veya deneme dersi hakkında soru sorabilirsiniz.',
+      connError: 'Bağlantı hatası. Lütfen tekrar deneyin.',
+    },
   },
 
   en: {
@@ -400,6 +411,17 @@ export const t = {
       ],
       copy: '© 2025 Lirik Sanat Evi. All rights reserved. · Mersin, Türkiye',
       dev: 'Design & Development',
+    },
+    chat: {
+      subtitle: 'How can we help you?',
+      placeholder: 'Type your message...',
+      newChat: 'Start new conversation',
+      sendHint: 'Press Enter to send · Shift+Enter for new line',
+      closeLabel: 'Close chat',
+      openLabel: 'Chat with our assistant',
+      greeting1: 'Hello! 🎵',
+      greeting2: 'I am the Lirik Sanat Evi assistant. You can ask me about courses, pricing or a free trial lesson.',
+      connError: 'Connection error. Please try again.',
     },
   },
 } as const

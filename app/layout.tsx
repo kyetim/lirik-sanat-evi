@@ -25,8 +25,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="antialiased">
         <Providers>
           {children}
+          <ChatWidget />
         </Providers>
-        <ChatWidget />
       </body>
     </html>
   )

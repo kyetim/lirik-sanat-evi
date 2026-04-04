@@ -19,5 +19,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
 
+  // n8n webhook — bülten bildirimi
+  try {
+    await fetch('https://kyetim.app.n8n.cloud/webhook/bulten-kayit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    })
+  } catch (webhookError) {
+    console.error('n8n newsletter webhook hatası:', webhookError)
+  }
+
   return NextResponse.json({ success: true })
 }
