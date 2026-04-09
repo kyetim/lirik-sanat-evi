@@ -1,4 +1,4 @@
-import { supabaseAdmin } from '@/lib/supabase-admin'
+import { getSupabaseAdmin } from '@/lib/supabase-admin'
 
 // Erişim: /admin?token=<ADMIN_TOKEN>
 // .env.local → ADMIN_TOKEN=güçlü-bir-şifre
@@ -72,12 +72,13 @@ export default async function AdminPage({
   }
 
   /* ── Veri çekme ── */
+  const admin = getSupabaseAdmin()
   const [{ data: trials }, { data: subscribers }] = await Promise.all([
-    supabaseAdmin
+    admin
       .from('trial_requests')
       .select('*')
       .order('created_at', { ascending: false }),
-    supabaseAdmin
+    admin
       .from('newsletter_subscribers')
       .select('*')
       .order('created_at', { ascending: false }),
@@ -104,9 +105,10 @@ export default async function AdminPage({
       <div style={{ padding: '32px 40px', maxWidth: 1200 }}>
 
         {/* Özet kartları */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: 40 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 40 }}>
           <StatCard label="Toplam Deneme Talebi" value={trialList.length} />
           <StatCard label="Bekleyen Talepler"    value={pendingCount}     color="#C9A84C" />
+          <StatCard label="Kayıt Olan"           value={enrolledCount}    color="#4ade80" />
           <StatCard label="Bülten Abonesi"        value={subscriberList.length} />
         </div>
 
