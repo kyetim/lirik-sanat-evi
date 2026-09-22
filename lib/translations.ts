@@ -178,7 +178,6 @@ export const t = {
       error: 'Bir hata oluştu. Lütfen tekrar deneyin.',
     },
     whatsapp: {
-      // Telefon numarasını güncelleyin: https://wa.me/905XXXXXXXXX
       message: 'Merhaba, Lirik Sanat Evi hakkında bilgi almak istiyorum.',
       ariaLabel: 'WhatsApp\'tan iletişime geçin',
     },
@@ -380,7 +379,6 @@ export const t = {
       error: 'Something went wrong. Please try again.',
     },
     whatsapp: {
-      // Update phone number: https://wa.me/905XXXXXXXXX
       message: 'Hello, I would like to get information about Lirik Sanat Evi.',
       ariaLabel: 'Contact us on WhatsApp',
     },

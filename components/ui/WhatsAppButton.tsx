@@ -1,9 +1,8 @@
 'use client'
 import { useLang } from '@/contexts/LanguageContext'
 
-// !! Telefon numarasını buraya girin: örn. 905324561234
-// !! Enter the phone number here: e.g. 905324561234
-const WHATSAPP_NUMBER = '905XXXXXXXXX'
+// Akademi WhatsApp hattı — wa.me formatı: ülke kodu + numara, '+' ve boşluk olmadan
+const WHATSAPP_NUMBER = '905417983648'
 
 export default function WhatsAppButton() {
   const { tr } = useLang()
