@@ -11,6 +11,7 @@ type FormData = {
   instrument: string
   student_age_range: string
   note: string
+  website: string // honeypot — insanlar görmez, botlar doldurur
 }
 
 export default function TrialForm() {
@@ -64,6 +65,9 @@ export default function TrialForm() {
           </div>
         ) : (
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            {/* Honeypot: ekran dışı, klavye ve ekran okuyucudan gizli */}
+            <input {...register('website')} type="text" tabIndex={-1} autoComplete="off"
+              aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }} />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <input {...register('first_name', { required: true })}
                 placeholder={f.firstName} className={fieldClass(!!errors.first_name)} />
