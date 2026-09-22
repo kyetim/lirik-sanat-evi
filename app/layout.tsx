@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Providers from '@/components/Providers'
-import ChatWidget from '@/components/ui/ChatWidget'
 
 export const metadata: Metadata = {
   title: 'Lirik Sanat Evi — Mersin Müzik Akademisi',
@@ -25,7 +24,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="antialiased">
         <Providers>
           {children}
-          <ChatWidget />
         </Providers>
       </body>
     </html>

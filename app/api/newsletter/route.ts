@@ -4,7 +4,6 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin'
 // Bülten kaydı — yazım yalnızca sunucudan (anon insert politikası kaldırıldı).
 // Gerekli env: SUPABASE_SERVICE_ROLE_KEY
 
-const WEBHOOK_URL = 'https://kyetim.app.n8n.cloud/webhook/bulten-kayit'
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 // Saf fonksiyon: ham gövde → normalize e-posta | hata | spam
@@ -16,20 +15,6 @@ function parseEmail(body: unknown): { email: string } | { error: string } | { sp
   if (!email) return { error: 'E-posta gerekli' }
   if (email.length > 200 || !EMAIL_RE.test(email)) return { error: 'Geçersiz e-posta' }
   return { email }
-}
-
-async function notifyWebhook(email: string) {
-  try {
-    const res = await fetch(WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
-      signal: AbortSignal.timeout(5000),
-    })
-    if (!res.ok) console.error('[newsletter] webhook HTTP', res.status)
-  } catch (e) {
-    console.error('[newsletter] webhook', e)
-  }
 }
 
 const serverError = () =>
@@ -56,6 +41,5 @@ export async function POST(req: NextRequest) {
     return serverError()
   }
 
-  await notifyWebhook(parsed.email)
   return NextResponse.json({ success: true })
 }

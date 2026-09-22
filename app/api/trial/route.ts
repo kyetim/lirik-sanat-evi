@@ -5,7 +5,6 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin'
 // Sözleşme: shared/contracts/bridge-architecture.md §4 — yazım yalnızca sunucu route'undan.
 // Gerekli env: SUPABASE_SERVICE_ROLE_KEY, LIRIK_TENANT_ID
 
-const WEBHOOK_URL = 'https://kyetim.app.n8n.cloud/webhook/deneme-dersi'
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const PHONE_RE = /^[\d\s()+-]{7,30}$/
 
@@ -45,20 +44,6 @@ function parseTrial(body: unknown): ParseResult {
   return { data }
 }
 
-async function notifyWebhook(payload: object) {
-  try {
-    const res = await fetch(WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      signal: AbortSignal.timeout(5000), // n8n takılırsa isteği bekletme
-    })
-    if (!res.ok) console.error('[trial] webhook HTTP', res.status)
-  } catch (e) {
-    console.error('[trial] webhook', e) // bildirim hatası kullanıcıyı etkilemez
-  }
-}
-
 const serverError = () =>
   NextResponse.json({ error: 'Talep kaydedilemedi, lütfen tekrar deneyin' }, { status: 500 })
 
@@ -95,13 +80,5 @@ export async function POST(req: NextRequest) {
     return serverError()
   }
 
-  await notifyWebhook({
-    name: `${d.firstName} ${d.lastName}`,
-    email: d.email,
-    phone: d.phone,
-    instrument: d.instrument,
-    student_age_range: d.ageRange,
-    note: d.note ?? '',
-  })
   return NextResponse.json({ success: true })
 }
