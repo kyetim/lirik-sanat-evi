@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
       phone: d.phone,
       email: d.email,
       instrument_interest: d.instrument,
-      how_heard: 'website',
+      how_heard: 'web', // masaüstü ön kayıt formundaki 'Web Sitesi' seçeneğinin değeri
       notes: [`Yaş aralığı: ${d.ageRange}`, d.note].filter(Boolean).join('\n'),
     })
     if (error) {

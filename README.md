@@ -56,9 +56,8 @@ Site, minimal ve zarif bir tasarım anlayışıyla; altın, lacivert ve krem ren
 |---|---|
 | 🌙 **Dark / Light Mod** | Kullanıcı tercihi localStorage'da saklanır |
 | 🌐 **TR / EN Dil Desteği** | Tüm içerik çift dilli, Context API ile yönetilir |
-| 🤖 **AI Chatbot** | n8n webhook + `@n8n/chat` entegrasyonu |
-| 📋 **Deneme Dersi Formu** | react-hook-form + Supabase + n8n e-posta bildirimi |
-| 📰 **Bülten Kaydı** | E-posta toplama, Supabase'e kayıt |
+| 📋 **Deneme Dersi Formu** | react-hook-form + sunucu route'u → Supabase `pre_registrations` (masaüstü otomasyonunda görünür) |
+| 📰 **Bülten Kaydı** | E-posta toplama, sunucu route'u üzerinden Supabase'e kayıt |
 | 💬 **WhatsApp Butonu** | Hazır mesajlı doğrudan WhatsApp bağlantısı |
 | 🎞 **Framer Motion** | Sayfa geçişleri, fade-up ve marquee animasyonları |
 | 📱 **Tam Responsive** | Mobil öncelikli tasarım, tüm ekran boyutlarında uyumlu |
@@ -81,8 +80,6 @@ Hero → Hakkımızda → Dersler → Öğretmenler → Neden Lirik →
 | **Animasyon** | [Framer Motion 12](https://www.framer.com/motion) |
 | **Veritabanı** | [Supabase](https://supabase.com) (PostgreSQL) |
 | **Form Yönetimi** | [React Hook Form 7](https://react-hook-form.com) |
-| **Otomasyon** | [n8n](https://n8n.io) (webhook, e-posta bildirimi) |
-| **Chatbot** | [@n8n/chat](https://www.npmjs.com/package/@n8n/chat) |
 | **Deploy** | [Vercel](https://vercel.com) |
 
 ### Proje Yapısı
@@ -95,7 +92,7 @@ lirik-sanat-evi/
 │   │   └── trial/              # Deneme dersi form endpoint'i
 │   ├── fonts/                  # Yerel font dosyaları
 │   ├── globals.css             # Global stiller, tema değişkenleri
-│   ├── layout.tsx              # Root layout, metadata, N8nChat
+│   ├── layout.tsx              # Root layout, metadata
 │   └── page.tsx                # Ana sayfa
 │
 ├── components/
@@ -108,7 +105,6 @@ lirik-sanat-evi/
 │   │   └── TrialForm.tsx       # Deneme dersi formu
 │   └── ui/
 │       ├── Cursor.tsx          # Özel imleç
-│       ├── N8nChat.tsx         # AI chatbot widget
 │       └── WhatsAppButton.tsx  # WhatsApp kayan butonu
 │
 ├── contexts/
@@ -158,8 +154,9 @@ npm run lint     # ESLint kontrolü
 NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
 
-# n8n Webhook (deneme dersi e-posta bildirimi)
-N8N_TRIAL_WEBHOOK_URL=https://your-n8n-instance/webhook/your-webhook-id
+# Sunucu tarafı (asla NEXT_PUBLIC_ olmayacak)
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+LIRIK_TENANT_ID=lirik_kiracisinin_uuid_degeri
 ```
 
 > **Not:** `NEXT_PUBLIC_` önekli değişkenler tarayıcıda görünür. Gizli anahtarları bu şekilde isimlendirmeyin.
@@ -193,9 +190,8 @@ The site follows a minimal, elegant design language built on a gold, navy, and c
 |---|---|
 | 🌙 **Dark / Light Mode** | User preference persisted in localStorage |
 | 🌐 **TR / EN Language** | All content is bilingual, managed via Context API |
-| 🤖 **AI Chatbot** | n8n webhook + `@n8n/chat` integration |
-| 📋 **Trial Lesson Form** | react-hook-form + Supabase + n8n email notification |
-| 📰 **Newsletter Signup** | Email collection, saved to Supabase |
+| 📋 **Trial Lesson Form** | react-hook-form + server route → Supabase `pre_registrations` (surfaces in the desktop app) |
+| 📰 **Newsletter Signup** | Email collection, saved to Supabase via a server route |
 | 💬 **WhatsApp Button** | Direct WhatsApp link with a pre-filled message |
 | 🎞 **Framer Motion** | Page transitions, fade-up and marquee animations |
 | 📱 **Fully Responsive** | Mobile-first design, adapted for all screen sizes |
@@ -218,8 +214,6 @@ Testimonials → Pricing → Trial Lesson Form → Newsletter → Footer
 | **Animation** | [Framer Motion 12](https://www.framer.com/motion) |
 | **Database** | [Supabase](https://supabase.com) (PostgreSQL) |
 | **Form Management** | [React Hook Form 7](https://react-hook-form.com) |
-| **Automation** | [n8n](https://n8n.io) (webhook, email notification) |
-| **Chatbot** | [@n8n/chat](https://www.npmjs.com/package/@n8n/chat) |
 | **Deployment** | [Vercel](https://vercel.com) |
 
 ### Project Structure
@@ -232,7 +226,7 @@ lirik-sanat-evi/
 │   │   └── trial/              # Trial lesson form endpoint
 │   ├── fonts/                  # Local font files
 │   ├── globals.css             # Global styles, CSS theme variables
-│   ├── layout.tsx              # Root layout, metadata, N8nChat
+│   ├── layout.tsx              # Root layout, metadata
 │   └── page.tsx                # Home page
 │
 ├── components/
@@ -245,7 +239,6 @@ lirik-sanat-evi/
 │   │   └── TrialForm.tsx       # Trial lesson form
 │   └── ui/
 │       ├── Cursor.tsx          # Custom cursor
-│       ├── N8nChat.tsx         # AI chatbot widget
 │       └── WhatsAppButton.tsx  # Floating WhatsApp button
 │
 ├── contexts/
@@ -295,8 +288,9 @@ Create a `.env.local` file:
 NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
 
-# n8n Webhook (trial lesson email notification)
-N8N_TRIAL_WEBHOOK_URL=https://your-n8n-instance/webhook/your-webhook-id
+# Server-side only (never prefix with NEXT_PUBLIC_)
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+LIRIK_TENANT_ID=uuid_of_the_lirik_tenant
 ```
 
 > **Note:** Variables prefixed with `NEXT_PUBLIC_` are exposed to the browser. Do not name secret keys this way.
